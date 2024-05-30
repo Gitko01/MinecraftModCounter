@@ -1,0 +1,16 @@
+[package]
+name = "ModCounter"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+base64 = "0.22.1"
+colorize = "0.1.0"
+indexmap = { version = "2.2.6", features = ["std", "serde"] }
+reqwest = "0.12.4"
+serde = "1.0.203"
+serde_derive = "1.0.203"
+serde_json = "1.0.117"
+tokio = { version = "1", features = ["full"] }
