@@ -3,10 +3,9 @@
 version = 3
 
 [[package]]
-name = "ModCounter"
-version = "0.1.0"
+name = "MinecraftModCounter"
+version = "1.0.1"
 dependencies = [
- "base64",
  "colorize",
  "indexmap",
  "reqwest",

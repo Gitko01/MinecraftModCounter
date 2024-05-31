@@ -8,13 +8,10 @@ use std::io::BufWriter;
 use std::io::Write;
 use std::num::ParseIntError;
 use colorize::AnsiColor;
-use base64::engine::general_purpose;
-use base64::Engine;
 use reqwest::header::HeaderName;
 use reqwest::Client;
 use reqwest::Response;
 use serde_derive::{Serialize, Deserialize};
-use std::error::Error;
 
 static MODLOADER_NAMES: [&str; 7] = ["Any", "Forge", "Cauldron", "LiteLoader", "Fabric", "Quilt", "NeoForge"];
 
@@ -73,30 +70,16 @@ async fn get_mod_count(client: Client, cf_api_key: String, game_version: String,
     total_count
 }
 
-fn encode_cf_api_key(cf_api_key: String) -> Result<String, Box<dyn Error>> {
-    Ok(std::str::from_utf8(&general_purpose::STANDARD_NO_PAD.decode(cf_api_key)?)?.to_string())
-}
-
 #[tokio::main]
 async fn main() -> Result<(), ()> {
     println!("Minecraft Mod Counter v1.0.0 - made by Chace Pratt\n");
 
-    let mut cf_api_key: String = get_cf_api_key();
+    let cf_api_key: String = get_cf_api_key();
 
     if cf_api_key == String::new() {
         println!("\n=== Press any key to close ===");
         stdin().read_line(&mut String::new()).unwrap();
         return Ok(());
-    } else {
-        let encoded = encode_cf_api_key(cf_api_key.clone());
-        if encoded.is_ok() {
-            cf_api_key = encoded.unwrap();
-        } else {
-            println!("{}", "CurseForge API key failed to encode (make sure there are absolutely no spaces and extra lines in the API key file)".b_red());
-            println!("\n=== Press any key to close ===");
-            stdin().read_line(&mut String::new()).unwrap();
-            return Ok(());
-        }
     }
 
     print!("{}", "Please enter a list of Minecraft version numbers seperated by commas: ".b_cyan());
