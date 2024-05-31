@@ -72,7 +72,7 @@ async fn get_mod_count(client: Client, cf_api_key: String, game_version: String,
 
 #[tokio::main]
 async fn main() -> Result<(), ()> {
-    println!("Minecraft Mod Counter v1.0.0 - made by Chace Pratt\n");
+    println!("Minecraft Mod Counter v1.0.1 - made by Chace Pratt\n");
 
     let cf_api_key: String = get_cf_api_key();
 
